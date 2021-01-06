@@ -1,11 +1,9 @@
 {
   "manifest_version": 2,
-
+  "version": "0.0",
   "name": "PubMed Symptoms Finder",
   "description": "This extension helps doctors and patients to find closely related medical research papers given a list of symptoms and a list of possible diagnoses. This could save doctors or patients hours to read through loosely related papers.",
-  "version": "0.0",
   "author": "Shelden Shi, Isabella Lee-Rubio, Ningyu Gao",
-  
   "icons": {
     "48": "48.png"
   }, 
