@@ -16,7 +16,7 @@
       "36":"36.png",
       "120":"120.png"
     },  
-    "default_popup": "dashboard.html"
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
