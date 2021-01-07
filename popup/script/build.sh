@@ -1,6 +1,7 @@
 #!/bin/bash
 
 build() {
+    rm -rf build
     echo 'building react'
 
 
