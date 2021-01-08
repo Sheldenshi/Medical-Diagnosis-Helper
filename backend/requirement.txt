@@ -1,0 +1,4 @@
+serpapi
+requests
+re
+bs4
