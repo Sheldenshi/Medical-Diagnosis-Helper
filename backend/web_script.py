@@ -1,5 +1,6 @@
 from serpapi import GoogleSearch
 import requests
+import argparse
 import re
 from bs4 import BeautifulSoup
 
@@ -58,3 +59,13 @@ for symptom in symptoms:
 
 suspectedDisease = diseases[count.index(max(count))]
 print('\033[95m' + 'The suspected disease is ' + suspectedDisease)
+
+def searcher(symtoms, diagnoses):
+    return
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Search articles.")
+    parser.add_argument("symtoms", help="Patient's symtoms.")
+    parser.add_argument("diagnoses", help="Diagnosis guesses.")
+    args = parser.parse_args()
+    searcher(args.symtoms, args.diagnoses)
+
