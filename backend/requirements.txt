@@ -2,3 +2,5 @@ google-search-results
 requests
 regex
 beautifulsoup4
+flask
+python-dotenv
