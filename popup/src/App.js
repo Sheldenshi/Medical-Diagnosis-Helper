@@ -1,39 +1,51 @@
 import React, {useState, useEffect} from 'react';
-import { Button } from 'semantic-ui-react'
+
+import { From } from './Components/Form/form'
 
 
 
 const App = () => {
-    const [symptoms, setSymptoms] = useState("")
-    const [diagnoses, setDiagnoses] = useState("")
-    const [currentTime, setCurrentTIme] = useState(0)
+    const [input, setInput] = useState({
+        symptoms: '',
+        diagnoses: ''
+    })
+    const [result, setResult] = useState([])
 
-    useEffect(
-        () => {
-        fetch('/time').then(res => res.json()).then(data => {
-            setCurrentTIme(data.time)
+    useEffect(() => {
+        fetch('/api').then(response => {
+            if(response.ok) {
+                return response.json()
+            }
+        }).then(data => setResult(data))
+        }, [])
+
+    const handleChange = (inputValue) => {
+        setInput(inputValue)
+    }
+    const handleInputSubmit = () => {
+        fetch('/api/input', {
+            method: 'POST',
+            body: JSON.stringify({
+                symptoms: input.symptoms,
+                diagnoses: input.diagnoses
+            })
         })
-        }, []
-    )
+    }
+
     return (
         <div className="text-center">
             <h1>Medical Resources Search Helper</h1>
-            <form>
-                <p className="text-15">
-                    Symptoms: {symptoms}
-                </p>
-                <textarea value = {symptoms} onChange = {event => setSymptoms(event.target.value)}/>
-                <p className="text-15">
-                    Diagnoses: {diagnoses}
-                </p>
-                <textarea value = {diagnoses} onChange = {event => setDiagnoses(event.target.value)}/>
-                <br/>
-                <Button onClick={() => console.log("nothing")} content='Search' />
-            </form>
-            
-            <p>The current time is {currentTime}.</p>
+            <From userInput={input} onChange={handleChange}/>
+            {result.map(result => {
+                return(
+                    <ul key={result.id}>
+                        <li>{result.symptoms}</li>
+                        <li>{result.diagnoses}</li>
+                    </ul>
+                )
+            })}
         </div>
-    );
+    )
     
 }
 
