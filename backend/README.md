@@ -6,7 +6,7 @@
 
 - Activate it by:
 
-``` .venv/bin/activate ```
+``` . venv/bin/activate ```
 
 - Pip install requirements by:
 
