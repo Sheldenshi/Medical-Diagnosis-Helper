@@ -1,9 +1,9 @@
+import time
 import flask
 
-app = flask.Flask("__main__")
+app = flask.Flask(__name__)
 
-@app.route("/")
-def my_index():
-    return flask.render_template("index.html", token="Flask+React")
+@app.route("/time")
+def get_current_time():
+    return {'time': time.time()}
 
-app.run(debug=True)
