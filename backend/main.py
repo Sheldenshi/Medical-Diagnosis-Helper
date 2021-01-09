@@ -1,9 +1,15 @@
-import time
 import flask
+#import web_script
 
 app = flask.Flask(__name__)
 
-@app.route("/time")
-def get_current_time():
-    return {'time': time.time()}
 
+
+
+@app.route("/api", methods = ['GET'])
+def index():
+    return {
+        "name": "Hello World"}
+
+if __name__ == '__main__':
+    app.run(debug=True)
