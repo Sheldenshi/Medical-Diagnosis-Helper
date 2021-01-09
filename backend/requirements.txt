@@ -4,3 +4,4 @@ regex
 beautifulsoup4
 flask
 python-dotenv
+Flask-SQLAlchemy
