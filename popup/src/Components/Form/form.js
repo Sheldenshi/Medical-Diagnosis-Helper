@@ -25,11 +25,11 @@ export const From = ({ userInput, onChange, handleInputSubmit }) => {
         <>
             <form onSubmit={handleSubmit}>
                 <p className="text-15">
-                    Symptoms: {userInput.symptoms}
+                    Symptoms: 
                 </p>
                 <textarea required value = {userInput.symptoms} onChange = {handleChangeSymptoms}/>
                 <p className="text-15">
-                    Diagnoses: {userInput.diagnoses}
+                    Diagnoses:
                 </p>
                 <textarea required value = {userInput.diagnoses} onChange = {handleChangeDiagnoses}/>
                 <br/>

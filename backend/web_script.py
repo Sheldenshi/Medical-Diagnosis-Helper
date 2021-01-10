@@ -44,6 +44,10 @@ def get_single_item_data(symptoms, item_url, symptom, linkCount, index):
                 linkCount[index][symptoms.index(symptom)] = len(results)
 
 def search(symptoms, diagnoses):
+    symptoms = symptoms.replace('\n', '')
+    diagnoses = diagnoses.replace('\n', '')
+    symptoms = symptoms.split(',')
+    diagnoses = diagnoses.split(',')
     links = []
     linkCount = []
     linkIndex = 0
@@ -69,11 +73,6 @@ def search(symptoms, diagnoses):
                 relevantString += ", "
         result.append([str(rankNum), links[i], relevantString])
         rankNum += 1
-        
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Search articles.")
-    parser.add_argument("symptoms", help="Patient's symptoms.")
-    parser.add_argument("diagnoses", help="Diagnosis guesses.")
-    args = parser.parse_args()
-    search(args.symptoms, args.diagnoses)
+    return result
+
 
