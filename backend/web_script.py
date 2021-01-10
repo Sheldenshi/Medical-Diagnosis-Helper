@@ -5,11 +5,7 @@ import numpy
 from bs4 import BeautifulSoup
 import argparse
 
-def trade_spider(diseaseList, symptom):
-    global numArticles
-    global links
-    global linkIndex
-    global linkCount
+def trade_spider(symptoms, diseaseList, symptom, links, linkCount, linkIndex):
     for disease in diseaseList:
         params = {
             "engine": "google",
@@ -20,23 +16,19 @@ def trade_spider(diseaseList, symptom):
         search = GoogleSearch(params)
         results = search.get_dict()
         organic_results = results['organic_results']
-        linkCount += ([0] * len(organic_results))
         for result in organic_results:
             link = result["link"]
             if link.__contains__("wikipedia"):
-                linkCount.pop()
                 continue
             if links.__contains__(link):
-                linkCount.pop()
-                get_single_item_data(link, symptom, links.index(link))
+                get_single_item_data(symptoms, link, symptom, linkCount, links.index(link))
             else:
+                linkCount.append([0] * len(symptoms))
                 links.append(link)
-                get_single_item_data(link, symptom, linkIndex)
+                get_single_item_data(symptoms, link, symptom, linkCount, linkIndex)
                 linkIndex += 1
 
-
-def get_single_item_data(item_url, symptom, index):
-    global linkCount
+def get_single_item_data(symptoms, item_url, symptom, linkCount, index):
     searched_word = symptom
     source_code = requests.get(item_url)
     plain_text = source_code.text
@@ -49,29 +41,35 @@ def get_single_item_data(item_url, symptom, index):
     for content in results:
         for sentence in content.split("."):
             if sentence.__contains__(searched_word):
-                linkCount[index] = len(results)
-
-
+                linkCount[index][symptoms.index(symptom)] = len(results)
 
 def search(symptoms, diagnoses):
     links = []
     linkCount = []
     linkIndex = 0
+    result = []
 
     for symptom in symptoms:
-        count = [0] * len(diagnoses)
-        numArticles = [0] * len(diagnoses)
-        numArticlesWithWord = [0] * len(diagnoses)
-        trade_spider(diagnoses, symptom)
+        trade_spider(symptoms, diagnoses, symptom, links, linkCount, linkIndex)
 
-    bestLink = links[linkCount.index(max(linkCount))]
+    sumLinkCount = []
+    for array in linkCount:
+        sumLinkCount.append(sum(array))
+
     rankNum = 1
-    ranked = numpy.argsort(linkCount)
+    ranked = numpy.argsort(sumLinkCount)
     largest = ranked[::-1][:10]
-    print('The following are the best 10 articles to check out based on your suspected diagnoses and related symptoms.')
     for i in largest:
-        print(str(rankNum) + ". " + links[i])
+        relevantString = "Contains "
+        for symptom in symptoms:
+            relevantString += symptom + " " + str(linkCount[i][symptoms.index(symptom)]) + " times"
+            if symptoms.index(symptom) == (len(symptoms) -1):
+                relevantString += "."
+            else:
+                relevantString += ", "
+        result.append([str(rankNum), links[i], relevantString])
         rankNum += 1
+        
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Search articles.")
     parser.add_argument("symptoms", help="Patient's symptoms.")
