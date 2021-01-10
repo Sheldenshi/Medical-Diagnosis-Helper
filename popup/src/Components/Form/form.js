@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'semantic-ui-react'
 
 
-export const From = ({ userInput, onChange }) => {
+export const From = ({ userInput, onChange, handleInputSubmit }) => {
     
     const handleChangeSymptoms = (event) => {
         onChange({
@@ -19,10 +19,11 @@ export const From = ({ userInput, onChange }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        handleInputSubmit()
     }
     return (
         <>
-            <form>
+            <form onSubmit={handleSubmit}> 
                 <input type='text' required value={userInput.symptoms} onChange={handleChangeSymptoms}></input>
                 <input type='text' required value={userInput.diagnoses} onChange={handleChangeDiagnoses}></input>
                 <input type='submit'></input>
