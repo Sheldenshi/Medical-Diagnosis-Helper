@@ -3,7 +3,7 @@ from flask import Flask, request, redirect, url_for, jsonify, json
 from flask_sqlalchemy import SQLAlchemy
 from web_script import search
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../popup/build', static_url_path='/')
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///result.db"
 db = SQLAlchemy(app)
 
@@ -26,8 +26,12 @@ def input_serializer(input):
 def create_db():
     db.create_all()
 
-@app.route("/api", methods = ['GET'])
+@app.route("/", methods = ['GET'])
 def index():
+    return app.send_static_file('index.html')
+    
+@app.route("/api", methods = ['GET'])
+def get_result():
     create_db()
     result = Result.query.all()
     return jsonify([*map(result_serializer, result)])
