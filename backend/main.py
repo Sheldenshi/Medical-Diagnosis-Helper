@@ -31,9 +31,13 @@ def index():
 @app.route('/api/input', methods = ['POST'])
 def handle_input():
     request_data = json.loads(request.data)
+    symptoms = request_data['symptoms']
+    diagnoses = request_data['diagnoses']
+    """
     input = Input(symptoms=request_data['symptoms'], diagnoses=request_data['diagnoses'])
     db.session.add(input)
     db.session.commit()
+    """
     return {'201': 'input added successfully'}
 
 if __name__ == '__main__':
