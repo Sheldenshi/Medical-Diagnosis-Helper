@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 
 import { From } from './Components/Form/form'
 
-
-
 const App = () => {
     const [input, setInput] = useState({
         symptoms: '',

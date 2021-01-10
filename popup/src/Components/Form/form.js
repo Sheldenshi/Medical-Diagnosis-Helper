@@ -23,12 +23,6 @@ export const From = ({ userInput, onChange, handleInputSubmit }) => {
     }
     return (
         <>
-            <form onSubmit={handleSubmit}> 
-                <input type='text' required value={userInput.symptoms} onChange={handleChangeSymptoms}></input>
-                <input type='text' required value={userInput.diagnoses} onChange={handleChangeDiagnoses}></input>
-                <input type='submit'></input>
-            </form>
-
             <form onSubmit={handleSubmit}>
                 <p className="text-15">
                     Symptoms: {userInput.symptoms}

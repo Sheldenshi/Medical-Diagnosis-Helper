@@ -3,6 +3,7 @@ import requests
 import re
 import numpy
 from bs4 import BeautifulSoup
+import argparse
 
 def trade_spider(diseaseList, symptom):
     global numArticles
@@ -50,31 +51,31 @@ def get_single_item_data(item_url, symptom, index):
             if sentence.__contains__(searched_word):
                 linkCount[index] = len(results)
 
-links = []
-linkCount = []
-linkIndex = 0
 
-for symptom in symptoms:
-    count = [0] * len(diagnoses)
-    numArticles = [0] * len(diagnoses)
-    numArticlesWithWord = [0] * len(diagnoses)
-    trade_spider(diagnoses, symptom)
 
-bestLink = links[linkCount.index(max(linkCount))]
-rankNum = 1
-ranked = numpy.argsort(linkCount)
-largest = ranked[::-1][:10]
-print('The following are the best 10 articles to check out based on your suspected diagnoses and related symptoms.')
-for i in largest:
-    print(str(rankNum) + ". " + links[i])
-    rankNum += 1
+def search(symptoms, diagnoses):
+    links = []
+    linkCount = []
+    linkIndex = 0
 
-def searcher(symptoms, diagnoses):
-    return
+    for symptom in symptoms:
+        count = [0] * len(diagnoses)
+        numArticles = [0] * len(diagnoses)
+        numArticlesWithWord = [0] * len(diagnoses)
+        trade_spider(diagnoses, symptom)
+
+    bestLink = links[linkCount.index(max(linkCount))]
+    rankNum = 1
+    ranked = numpy.argsort(linkCount)
+    largest = ranked[::-1][:10]
+    print('The following are the best 10 articles to check out based on your suspected diagnoses and related symptoms.')
+    for i in largest:
+        print(str(rankNum) + ". " + links[i])
+        rankNum += 1
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Search articles.")
     parser.add_argument("symptoms", help="Patient's symptoms.")
     parser.add_argument("diagnoses", help="Diagnosis guesses.")
     args = parser.parse_args()
-    searcher(args.symptoms, args.diagnoses)
+    search(args.symptoms, args.diagnoses)
 
