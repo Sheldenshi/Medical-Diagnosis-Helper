@@ -20,7 +20,7 @@ const App = () => {
         for (var i = 0; i < Object.keys(resultJson).length; i++) {
             resultList.push(resultJson[i])
         }
-        console.log(resultList);
+        //console.log(resultList);
         setResult(resultList)
     }
     const handleInputSubmit = () => {
@@ -36,7 +36,7 @@ const App = () => {
             }
         }).then(response => response.json())
         .then(resultJson => {
-            console.log(resultJson)
+            //(resultJson)
             setInput({
                 symptoms: "",
                 diagnoses: ""
