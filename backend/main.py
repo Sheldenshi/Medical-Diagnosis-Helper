@@ -10,15 +10,18 @@ def index():
     return app.send_static_file('index.html')
 
 def format_result(result):
-    formated = []
+    formated = {}
+    id_num = 0
     for r in result:
         rank = r[0]
         link = r[1]
         relativity = r[2]
-        temp = {'rank': rank,
+        temp = {'id': id_num,
+                'rank': rank,
                 'link': link,
                 'relativity': relativity}
-        formated.append(temp)
+        formated[id_num] = temp
+        id_num += 1
     return formated
 
 @app.route('/api/search', methods = ['GET', 'POST'])
@@ -27,7 +30,7 @@ def handle_search():
     symptoms = request_data['symptoms']
     diagnoses = request_data['diagnoses']
     result = search(symptoms, diagnoses)
-    format_result(result)
+    result = format_result(result)
     return result
 
 
