@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, jsonify
+from flask import Flask, request, redirect, url_for, jsonify, json
 #import web_script
 from flask_sqlalchemy import SQLAlchemy
 
@@ -28,6 +28,13 @@ def index():
     input = Input.query.all()
     return jsonify([*map(input_serializer, input)])
 
+@app.route('/api/input', methods = ['POST'])
+def handle_input():
+    request_data = json.loads(request.data)
+    input = Input(symptoms=request_data['symptoms'], diagnoses=request_data['diagnoses'])
+    db.session.add(input)
+    db.session.commit()
+    return {'201': 'input added successfully'}
 
 if __name__ == '__main__':
     app.run(debug=True)
