@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 import { From } from './Components/Form/form'
-import { ListResult } from './Components/SearchResult/searchResult'
+import { ListResult } from './Components/SearchResult/showResult'
 
 const App = () => {
     const [input, setInput] = useState({
@@ -11,20 +11,21 @@ const App = () => {
     })
     const [result, setResult] = useState([])
     const [searching, setSearching] = useState(false)
-    const getResult = () => {
-        fetch('/api').then(response => {
-            if(response.ok) {
-                return response.json()
-            }
-        }).then(data => setResult(data))
-    }
     
     const handleChange = (inputValue) => {
         setInput(inputValue)
     }
+    const handleResult = (resultJson) => {
+        const resultList = []
+        for (var i = 0; i < Object.keys(resultJson).length; i++) {
+            resultList.push(resultJson[i])
+        }
+        console.log(resultList);
+        setResult(resultList)
+    }
     const handleInputSubmit = () => {
         setSearching(true)
-        fetch('/api/input', {
+        fetch('/api/search', {
             method: 'POST',
             body: JSON.stringify({
                 symptoms: input.symptoms,
@@ -34,14 +35,14 @@ const App = () => {
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then(response => response.json())
-        .then(message => {
-            console.log(message)
+        .then(resultJson => {
+            console.log(resultJson)
             setInput({
                 symptoms: "",
                 diagnoses: ""
             })
             setSearching(false)
-            getResult()
+            handleResult(resultJson)
         })
     }
     if (searching) {
