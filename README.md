@@ -12,5 +12,5 @@ This project is built using React frontend and Flask backend.
 
 
 # Releases:
-## Version1.0: 
+## Version 1.0: 
 Given a list of symptoms and a list of possible diseases by doctors or Symptom Checker, find articles on PubMed that are closely related to the symptoms. Relatedness is defined as number of times input symptoms appear in a given article.
