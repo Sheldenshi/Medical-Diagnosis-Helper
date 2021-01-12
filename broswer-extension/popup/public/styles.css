@@ -1,6 +1,8 @@
 body {
   font-family: "Source Sans Pro", sans-serif;
   background: #72cac9;
+  height: 500px;
+  width: 300px;
   }
 
 textarea {

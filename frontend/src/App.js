@@ -25,7 +25,11 @@ const App = () => {
     }
     const handleInputSubmit = () => {
         setSearching(true)
-        fetch('/api/search', {
+        console.log(JSON.stringify({
+            symptoms: input.symptoms,
+            diagnoses: input.diagnoses
+        }));
+        fetch('https://medical-diagnosis-helper-api.herokuapp.com/api/search', {
             method: 'POST',
             body: JSON.stringify({
                 symptoms: input.symptoms,

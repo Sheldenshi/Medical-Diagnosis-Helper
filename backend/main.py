@@ -1,5 +1,14 @@
-from flask import Flask, request, redirect, url_for, jsonify, json
+from flask import Flask, request, redirect, url_for, jsonify, json, Blueprint
+from flask_restful import Api
 from web_script import search
+import os
+
+
+
+
+
+
+
 
 app = Flask(__name__, static_folder='./build', static_url_path='/')
 
@@ -26,6 +35,7 @@ def format_result(result):
 
 @app.route('/api/search', methods = ['GET', 'POST'])
 def handle_search():
+    print(request.args)
     request_data = json.loads(request.data)
     symptoms = request_data['symptoms']
     diagnoses = request_data['diagnoses']
