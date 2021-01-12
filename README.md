@@ -3,7 +3,8 @@ Medical Diagnosis Helper
 
 The aim of this project is to build a tool that could help doctors and patients to find medical resources that are informative for individual cases effectively. Our [last release V1.0](#version-10) could save doctors or patients hours to read through loosely related papers(see Releases for more details).
 
-Current version can be find live [here{:target="_blank" rel="noopener"}](https://medical-resources-helper.herokuapp.com/)
+Current version can be find live
+<a href="https://medical-resources-helper.herokuapp.com/" target="_blank">here</a>
 
 This project is built using React frontend and Flask backend.
 
