@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, url_for, jsonify, json
 from web_script import search
 
-app = Flask(__name__, static_folder='../popup/build', static_url_path='/')
+app = Flask(__name__, static_folder='./build', static_url_path='/')
 
 
 

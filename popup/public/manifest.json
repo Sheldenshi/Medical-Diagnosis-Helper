@@ -5,14 +5,14 @@
   "description": "This extension helps doctors and patients to find closely related medical research papers given a list of symptoms and a list of possible diagnoses. This could save doctors or patients hours to read through loosely related papers.",
   "author": "Shelden Shi, Isabella Lee-Rubio, Ningyu Gao",
   "icons": {
-    "48": "48.png"
+    "60": "60.png"
   }, 
   "browser_action": {
     "default_title": "Medical Resources Search Helper",
     "default_icon": {
-      "16":"16.png",
-      "36":"36.png",
-      "120":"120.png"
+      "120":"120.png",
+      "144":"144.png",
+      "180":"180.png"
     },  
     "default_popup": "index.html"
   },

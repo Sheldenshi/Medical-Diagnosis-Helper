@@ -3,7 +3,7 @@ import { List } from 'semantic-ui-react'
 
 export const ListResult = ({result}) => {
     return(
-        <List className="text-left">
+        <List className="text-center">
             {result.map(result => {
                 return(
                     <List.Item key={result.id}>
