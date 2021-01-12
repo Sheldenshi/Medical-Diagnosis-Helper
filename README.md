@@ -6,7 +6,7 @@ The aim of this project is to build a tool that could help doctors and patients 
 Current version can be found live 
 <a href="https://medical-diagnosis-helper.herokuapp.com/" target="blank">here</a>
 
-Browser extension can be found on [Chrome Web Store](#https://chrome.google.com/webstore/detail/medical-diagnosis-helper/nndmgnalmbegakdafgabnedimonaekok/related?hl=en)
+Browser extension can be found on [Chrome Web Store](https://chrome.google.com/webstore/detail/medical-diagnosis-helper/nndmgnalmbegakdafgabnedimonaekok/related?hl=en)
 
 
 This project is built using React frontend and Flask backend.
