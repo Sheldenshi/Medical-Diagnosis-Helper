@@ -1,19 +1,13 @@
 import argparse
+from web_script import search
 
 
 def dumb(symtoms, diagnoses):
     print(f"{symtoms}{diagnoses}")
-    for x in range(100):
-        print(x)
     
 
-    return list(range(100))
+    return [[1, "shelden.tech", 5], [2, "google.com", 10]]
 
 
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Search articles.")
-    parser.add_argument("symtoms", help="Patient's symtoms.")
-    parser.add_argument("diagnoses", help="Diagnosis guesses.")
-    args = parser.parse_args()
-    dumb(args.symtoms, args.diagnoses)
+#print(search(["anemia", "weakness"], ["Celiac Disease", "Lupus", "ALS"]))
+print("anemia, weakness".split(','))
