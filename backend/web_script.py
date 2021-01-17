@@ -30,6 +30,10 @@ def trade_spider(symptoms, diseaseList, symptom, links, linkCount, linkIndex):
 
 def get_single_item_data(symptoms, item_url, symptom, linkCount, index):
     searched_word = symptom
+    try:
+        source_code = requests.get(item_url)
+    except requests.exceptions.RequestException:
+        return
     source_code = requests.get(item_url)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text,"html.parser")
@@ -48,6 +52,7 @@ def search(symptoms, diagnoses):
     linkCount = []
     linkIndex = 0
     result = []
+    expectedSeconds = len(symptoms) * len(diagnoses) * 12
 
     for symptom in symptoms:
         trade_spider(symptoms, diagnoses, symptom, links, linkCount, linkIndex)
